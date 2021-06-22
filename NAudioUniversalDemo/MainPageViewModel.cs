@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Windows.Storage.Streams;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
-using NAudio.Win8.Wave.WaveOutputs;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
@@ -14,7 +12,7 @@ namespace NAudioUniversalDemo
 {
     class MainPageViewModel : ViewModelBase
     {
-        private IWavePlayer player;
+        private WasapiOutRT player;
         private WaveStream reader;
         private IWaveIn recorder;
         private MemoryStream recordStream;
@@ -79,7 +77,7 @@ namespace NAudioUniversalDemo
             {
                 recorder = new WasapiCaptureRT();
                 recorder.RecordingStopped += RecorderOnRecordingStopped;
-                recorder.DataAvailable += RecorderOnDataAvailable;               
+                recorder.DataAvailable += RecorderOnDataAvailable;
             }
 
             if (reader != null)
